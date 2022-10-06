@@ -7,3 +7,4 @@
 | [demo_05](./demo_05/)   | 基于 net/rpc 实现 client_stub 和 server_stub        |
 | [demo_06](./demo_06/)   | protobuf 使用        |
 | [demo_07](./demo_07/)   | grpc stream 使用        |
+| [demo_08](./demo_08/)   | gin       |
