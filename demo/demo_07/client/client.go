@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"example.com/test/demo/demo_07/proto"
+	stream "example.com/test/demo/common/stream/proto/v1"
 	"google.golang.org/grpc"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	}
 	defer cc.Close()
 
-	gc := proto.NewGreeterClient(cc)
+	gc := stream.NewGreeterClient(cc)
 
 	// getStream(gc)
 
@@ -26,7 +26,7 @@ func main() {
 	allStream(gc)
 }
 
-func allStream(gc proto.GreeterClient) {
+func allStream(gc stream.GreeterClient) {
 	g, err := gc.AllStream(context.Background())
 	if err != nil {
 		panic(fmt.Sprintf("error: %s", err))
@@ -50,7 +50,7 @@ func allStream(gc proto.GreeterClient) {
 	go func() {
 		defer wg.Done()
 		for {
-			err = g.Send(&proto.StreamReqData{
+			err = g.Send(&stream.StreamReqData{
 				Data: fmt.Sprintf("client stream: %v", time.Now().Unix()),
 			})
 			if err != nil {
@@ -63,13 +63,13 @@ func allStream(gc proto.GreeterClient) {
 	wg.Wait()
 }
 
-func putStream(gc proto.GreeterClient) {
+func putStream(gc stream.GreeterClient) {
 	g, err := gc.PutStream(context.Background())
 	if err != nil {
 		panic(fmt.Sprintf("error: %s", err))
 	}
 	for {
-		err = g.Send(&proto.StreamReqData{
+		err = g.Send(&stream.StreamReqData{
 			Data: fmt.Sprintf("put stream: %v", time.Now().Unix()),
 		})
 		if err != nil {
@@ -80,8 +80,8 @@ func putStream(gc proto.GreeterClient) {
 	}
 }
 
-func getStream(gc proto.GreeterClient) {
-	res, err := gc.GetStream(context.Background(), &proto.StreamReqData{
+func getStream(gc stream.GreeterClient) {
+	res, err := gc.GetStream(context.Background(), &stream.StreamReqData{
 		Data: "cloaks",
 	})
 	if err != nil {

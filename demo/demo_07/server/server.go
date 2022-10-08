@@ -6,21 +6,22 @@ import (
 	"sync"
 	"time"
 
-	"example.com/test/demo/demo_07/proto"
 	"google.golang.org/grpc"
+
+	stream "example.com/test/demo/common/stream/proto/v1"
 )
 
 type Server struct{}
 
-func (s *Server) GetStream(req *proto.StreamReqData, res proto.Greeter_GetStreamServer) error {
-	err := res.Send(&proto.StreamResData{
+func (s *Server) GetStream(req *stream.StreamReqData, res stream.Greeter_GetStreamServer) error {
+	err := res.Send(&stream.StreamResData{
 		Data: fmt.Sprintf("req data: %s", req.Data),
 	})
 	if err != nil {
 		return err
 	}
 	for {
-		err = res.Send(&proto.StreamResData{
+		err = res.Send(&stream.StreamResData{
 			Data: fmt.Sprintf("get stream: %v", time.Now().Unix()),
 		})
 		if err != nil {
@@ -32,7 +33,7 @@ func (s *Server) GetStream(req *proto.StreamReqData, res proto.Greeter_GetStream
 	return nil
 }
 
-func (s *Server) PutStream(req proto.Greeter_PutStreamServer) error {
+func (s *Server) PutStream(req stream.Greeter_PutStreamServer) error {
 	for {
 		srd, err := req.Recv()
 		if err != nil {
@@ -44,7 +45,7 @@ func (s *Server) PutStream(req proto.Greeter_PutStreamServer) error {
 	return nil
 }
 
-func (s *Server) AllStream(req proto.Greeter_AllStreamServer) error {
+func (s *Server) AllStream(req stream.Greeter_AllStreamServer) error {
 	wg := sync.WaitGroup{}
 	wg.Add(2)
 	go func ()  {
@@ -62,7 +63,7 @@ func (s *Server) AllStream(req proto.Greeter_AllStreamServer) error {
 	go func ()  {
 		defer wg.Done()
 		for {
-			err := req.Send(&proto.StreamResData{
+			err := req.Send(&stream.StreamResData{
 				Data: fmt.Sprintf("server stream: %v", time.Now().Unix()),
 			})
 			if err != nil {
@@ -84,7 +85,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	proto.RegisterGreeterServer(s, &Server{})
+	stream.RegisterGreeterServer(s, &Server{})
 
 	err = s.Serve(l)
 	if err != nil {
