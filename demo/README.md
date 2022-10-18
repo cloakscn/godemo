@@ -13,3 +13,4 @@
 | [demo_11](./demo_11/)   | grpc interceptor       |
 | [demo_12](./demo_12/)   | grpc interceptor metadata       |
 | [demo_14](./demo_14/)   | grpc 错误处理和超时机制       |
+| [demo_15](./demo_15/)   | gorm       |
