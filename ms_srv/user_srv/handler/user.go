@@ -9,7 +9,7 @@ import (
 
 	"example.com/test/ms_srv/user_srv/global"
 	"example.com/test/ms_srv/user_srv/model"
-	"example.com/test/ms_srv/user_srv/model/proto"
+	"example.com/test/ms_srv/user_srv/proto"
 	"github.com/anaskhan96/go-password-encoder"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"

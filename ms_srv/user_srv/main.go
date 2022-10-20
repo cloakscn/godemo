@@ -6,7 +6,7 @@ import (
 	"net"
 
 	"example.com/test/ms_srv/user_srv/handler"
-	"example.com/test/ms_srv/user_srv/model/proto"
+	"example.com/test/ms_srv/user_srv/proto"
 	"google.golang.org/grpc"
 )
 
