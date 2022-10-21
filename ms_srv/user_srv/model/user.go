@@ -8,8 +8,8 @@ import (
 
 type BaseModel struct {
 	ID int32 `gorm:"primarykey"`
-	CreateAt time.Time `gorm:"column:add_time"`
-	UpdateAt time.Time `gorm:"column:add_time"`
+	CreateAt *time.Time `gorm:"column:add_time"`
+	UpdateAt *time.Time `gorm:"column:add_time"`
 	Deleted gorm.DeletedAt
 	IsDeleted bool `gorm:"column:is_deleted"`
 }

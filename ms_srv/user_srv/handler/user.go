@@ -124,7 +124,7 @@ func (s *UserServer) UpdateUser(ctx context.Context, req *proto.UpdateUserInfo) 
 	user.NickName = req.NickName
 	user.Birthday = &birthday
 	user.Gender = req.Gender
-	d = global.DB.Save(user)
+	d = global.DB.Save(&user)
 	if d.Error != nil {
 		return nil, status.Errorf(codes.Internal, d.Error.Error())
 	}

@@ -11,8 +11,8 @@ import (
 )
 
 type TBBank struct {
-	ID uint
-	Name string
+	ID      uint   `gorm:"primaryKey"`
+	Name    string `gorm:"column:user_name;type:varchar(20);index:idx_user_name"`
 	balance int
 }
 
@@ -23,12 +23,12 @@ func main() {
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
 		logger.Config{
 			SlowThreshold: time.Second,
-			LogLevel: logger.Silent,
-			Colorful: true,
+			LogLevel:      logger.Silent,
+			Colorful:      true,
 		},
 	)
 
-	_, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: newLogger,
 	})
 	if err != nil {
@@ -36,8 +36,8 @@ func main() {
 	}
 
 	// 自动建表
-	// err = db.AutoMigrate(&TBBank{})
-	// if err != nil {
-		// panic(err)
-	// }
+	err = db.AutoMigrate(&TBBank{})
+	if err != nil {
+		panic(err)
+	}
 }
