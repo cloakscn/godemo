@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-option go_option = "gen/interceptor/proto/v1";
-
-service HelloService {
-    rpc SayHello
-}
