@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"example.com/test/ms_srv/user_srv/global"
-	"example.com/test/ms_srv/user_srv/model"
-	"example.com/test/ms_srv/user_srv/proto"
+	"example.com/ms_srv/user_srv/global"
+	"example.com/ms_srv/user_srv/model"
+	"example.com/ms_srv/user_srv/proto"
 	"github.com/anaskhan96/go-password-encoder"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/codes"
@@ -26,6 +26,7 @@ func Model2Respnse(user model.User) *proto.UserInfoResponse {
 	userInfoRsp := proto.UserInfoResponse{
 		Id:       user.ID,
 		Password: user.Password,
+		Mobile:   user.Mobile,
 		NickName: user.NickName,
 		Gender:   user.Gender,
 		Role:     int32(user.Role),

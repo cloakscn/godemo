@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"example.com/test/ms_srv/user_srv/proto"
+	"example.com/ms_srv/user_srv/proto"
 	"google.golang.org/grpc"
 )
 var (

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 
-	"example.com/test/ms_srv/user_srv/handler"
-	"example.com/test/ms_srv/user_srv/proto"
+	"example.com/ms_srv/user_srv/handler"
+	"example.com/ms_srv/user_srv/proto"
 	"google.golang.org/grpc"
 )
 

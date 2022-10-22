@@ -1,0 +1,6 @@
+{"level":"info","ts":1666409714.3142557,"caller":"zap_log_file/main.go:26","msg":"failed to fetch URL","url":"http://example.org/api","attempt":3,"backoff":1}
+{"level":"info","ts":1666409714.314313,"caller":"zap_log_file/main.go:33","msg":"failed to fetch URL","url":"http://example.org/api","attempt":3,"backoff":1}
+{"level":"info","ts":1666409714.3144023,"caller":"zap_log_file/main.go:38","msg":"Failed to fetch URL: http://example.org/api"}
+{"level":"info","ts":1666410023.965931,"caller":"zap_log_file/main.go:28","msg":"failed to fetch URL","url":"http://example.org/api","attempt":3,"backoff":1}
+{"level":"info","ts":1666410023.9659896,"caller":"zap_log_file/main.go:35","msg":"failed to fetch URL","url":"http://example.org/api","attempt":3,"backoff":1}
+{"level":"info","ts":1666410023.966027,"caller":"zap_log_file/main.go:40","msg":"Failed to fetch URL: http://example.org/api"}

@@ -15,7 +15,7 @@ import (
 	"os"
 	"time"
 
-	"example.com/test/ms_srv/user_srv/model"
+	"example.com/ms_srv/user_srv/model"
 	"github.com/anaskhan96/go-password-encoder"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
