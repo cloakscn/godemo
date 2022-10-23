@@ -4,8 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
+	"example.com/ms_api/user_web/forms"
+	"example.com/ms_api/user_web/global"
 	"example.com/ms_api/user_web/global/response"
 	"example.com/ms_api/user_web/proto"
 	"github.com/gin-gonic/gin"
@@ -41,20 +44,24 @@ func HandleGrpcErrorToHttp(err error, ctx *gin.Context) {
 	}
 }
 
-
+// GetUserList
 func GetUserList(ctx *gin.Context) {
-	ip := "127.0.0.1"
-	port := 8080
-
-	cc, err := grpc.Dial(fmt.Sprintf("%s:%d", ip, port), grpc.WithInsecure())
+	cc, err := grpc.Dial(fmt.Sprintf("%s:%s", global.ServerConfig.UserSrvInfo.Host, global.ServerConfig.UserSrvInfo.Port), grpc.WithInsecure())
 	if err != nil {
 		zap.S().Errorw("GetUserList connect user server failed", "msg", err.Error())
 	}
 
 	uc := proto.NewUserClient(cc)
+	
+	pageNum, _ := strconv.Atoi(ctx.DefaultQuery("pageNum", "0"))
+	pageSize, _ := strconv.Atoi(ctx.DefaultQuery("pageSize", "10"))
+
+	zap.S().Debug(pageNum)
+	zap.S().Debug(pageSize)
+
 	rsp, err := uc.GetUserList(context.Background(), &proto.PageInfo{
-		PageNum: 1,
-		PageSize: 10,
+		PageNum: uint32(pageNum),
+		PageSize: uint32(pageSize),
 	})
 	if err != nil {
 		zap.S().Errorw("GetUserList visited user server failed", "msg", err.Error())
@@ -75,4 +82,12 @@ func GetUserList(ctx *gin.Context) {
 		result = append(result, data)
 	}
 	ctx.JSON(http.StatusOK, rsp)
+}
+
+// PasswordLogin
+func PasswordLogin(ctx *gin.Context) {
+	passwordLoginForm := forms.PasswordLoginForm{}
+	if err := ctx.ShouldBindJSON(&passwordLoginForm); err != nil {
+		zap.S().Errorf(err.Error())
+	}
 }
