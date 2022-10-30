@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	v1 "example.com/test/demo/demo_11/proto/gen/interceptor/v1"
+	v1 "example.com/demo/demo_11/proto/gen/interceptor/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"

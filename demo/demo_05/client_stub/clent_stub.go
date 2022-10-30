@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/rpc"
 
-	"example.com/test/demo/demo_05/handler"
+	"example.com/demo/demo_05/handler"
 )
 
 type HelloServiceStub struct {

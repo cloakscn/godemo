@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	demo "example.com/test/demo/demo_14/proto/gen/demo/v1"
+	demo "example.com/demo/demo_14/proto/gen/demo/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 )

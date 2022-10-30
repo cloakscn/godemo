@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	timestamp "example.com/test/demo/demo_09/proto/gen/timestamp/v1"
+	timestamp "example.com/demo/demo_09/proto/gen/timestamp/v1"
 	"google.golang.org/grpc"
 )
 

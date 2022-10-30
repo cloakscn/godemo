@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	stream "example.com/test/demo/common/stream/proto/v1"
+	stream "example.com/demo/common/stream/proto/v1"
 )
 
 type Server struct{}

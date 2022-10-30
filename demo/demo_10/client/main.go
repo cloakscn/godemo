@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	v1 "example.com/test/demo/demo_10/proto/gen/metadata/proto/v1"
+	v1 "example.com/demo/demo_10/proto/gen/metadata/proto/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )

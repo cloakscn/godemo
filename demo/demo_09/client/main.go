@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	v1 "example.com/test/demo/demo_09/proto/gen/timestamp/v1"
+	v1 "example.com/demo/demo_09/proto/gen/timestamp/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )

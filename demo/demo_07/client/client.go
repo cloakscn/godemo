@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	stream "example.com/test/demo/common/stream/proto/v1"
+	stream "example.com/demo/common/stream/proto/v1"
 	"google.golang.org/grpc"
 )
 

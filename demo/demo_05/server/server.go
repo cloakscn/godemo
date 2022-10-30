@@ -4,8 +4,8 @@ import (
 	"net"
 	"net/rpc"
 
-	"example.com/test/demo/demo_05/handler"
-	"example.com/test/demo/demo_05/server_stub"
+	"example.com/demo/demo_05/handler"
+	"example.com/demo/demo_05/server_stub"
 )
 
 func main() {

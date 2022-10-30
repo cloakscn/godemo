@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"example.com/test/demo/demo_05/client_stub"
+	"example.com/demo/demo_05/client_stub"
 )
 
 func main() {

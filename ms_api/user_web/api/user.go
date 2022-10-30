@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"example.com/ms_api/user_web/forms"
@@ -12,11 +13,21 @@ import (
 	"example.com/ms_api/user_web/global/response"
 	"example.com/ms_api/user_web/proto"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
+
+// removeTopStruct
+func removeTopStruct(fileds map[string]string) map[string]string {
+	rsp := map[string]string{}
+	for filed, err := range fileds {
+		rsp[filed[strings.Index(filed, ".") + 1:]] = err
+	}
+	return rsp
+}
 
 // HandleGrpcErrorToHttp
 func HandleGrpcErrorToHttp(err error, ctx *gin.Context) {
@@ -52,7 +63,7 @@ func GetUserList(ctx *gin.Context) {
 	}
 
 	uc := proto.NewUserClient(cc)
-	
+
 	pageNum, _ := strconv.Atoi(ctx.DefaultQuery("pageNum", "0"))
 	pageSize, _ := strconv.Atoi(ctx.DefaultQuery("pageSize", "10"))
 
@@ -60,7 +71,7 @@ func GetUserList(ctx *gin.Context) {
 	zap.S().Debug(pageSize)
 
 	rsp, err := uc.GetUserList(context.Background(), &proto.PageInfo{
-		PageNum: uint32(pageNum),
+		PageNum:  uint32(pageNum),
 		PageSize: uint32(pageSize),
 	})
 	if err != nil {
@@ -87,7 +98,15 @@ func GetUserList(ctx *gin.Context) {
 // PasswordLogin
 func PasswordLogin(ctx *gin.Context) {
 	passwordLoginForm := forms.PasswordLoginForm{}
-	if err := ctx.ShouldBindJSON(&passwordLoginForm); err != nil {
-		zap.S().Errorf(err.Error())
+	if err := ctx.ShouldBind(&passwordLoginForm); err != nil {
+		errs, ok := err.(validator.ValidationErrors)
+		if !ok {
+			ctx.JSON(http.StatusOK, gin.H{
+				"msg": err.Error(),
+			})
+		}
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"error": removeTopStruct(errs.Translate(global.Trans)),
+		})
 	}
 }
